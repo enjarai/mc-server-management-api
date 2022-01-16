@@ -22,6 +22,15 @@ export class UsersController {
         return {message: "User created"};
     }
 
+    @Post('delete')
+    async delete(@Body() body): Promise<any> {
+        const user = await this.usersService.findOne(body);
+        if (!user) throw new BadRequestException("User doesnt exist")
+
+        await this.usersService.remove(user);
+        return {message: "User deleted"};
+    }
+
     @Post('login')
     @Public()
     @UseGuards(LocalAuthGuard)
