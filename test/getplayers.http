@@ -1,0 +1,4 @@
+GET http://localhost:3000/players/test1
+Accept: application/json
+
+###
