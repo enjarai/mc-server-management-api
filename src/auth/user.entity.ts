@@ -11,8 +11,8 @@ export class User {
     @Column()
     password: string;
 
-    getReturnable(): any {
-        const {password, ...returnableUser} = this;
+    static getReturnable(user: User): any {
+        const {password, ...returnableUser} = user;
         return returnableUser;
     }
 }

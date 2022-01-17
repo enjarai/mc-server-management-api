@@ -21,6 +21,7 @@ import {PassportModule} from "@nestjs/passport";
 import {AuthService} from "./auth/auth.service";
 import {JwtStrategy} from "./auth/jwt.strategy";
 import {LocalStrategy} from "./auth/local.strategy";
+import {AuthController} from "./auth/auth.controller";
 
 const logger = new Logger("Startup");
 
@@ -41,7 +42,8 @@ const logger = new Logger("Startup");
   controllers: [
       AppController,
       PlayersController,
-      UsersController
+      UsersController,
+      AuthController
   ],
   providers: [
       AppService,
