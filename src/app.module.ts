@@ -1,5 +1,4 @@
 import {Logger, Module} from '@nestjs/common';
-import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { PlayersService } from './players/players.service';
 import { PlayersController } from "./players/players.controller";
@@ -22,6 +21,7 @@ import {AuthService} from "./auth/auth.service";
 import {JwtStrategy} from "./auth/jwt.strategy";
 import {LocalStrategy} from "./auth/local.strategy";
 import {AuthController} from "./auth/auth.controller";
+import {ServersController} from "./servers/servers.controller";
 
 const logger = new Logger("Startup");
 
@@ -40,10 +40,11 @@ const logger = new Logger("Startup");
       PassportModule
   ],
   controllers: [
-      AppController,
+      //AppController,
       PlayersController,
       UsersController,
-      AuthController
+      AuthController,
+      ServersController
   ],
   providers: [
       AppService,

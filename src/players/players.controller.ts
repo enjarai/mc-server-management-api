@@ -1,21 +1,24 @@
 import {Controller, Get, Param, Req} from '@nestjs/common';
 import {PlayersService} from "./players.service";
 import {Player} from "./player.interface";
-import {ServersService} from "../servers/servers.service";
 
 @Controller('players')
 export class PlayersController {
-    constructor(private readonly statsService: PlayersService,
-                private readonly serversService: ServersService) {}
+    constructor(private readonly playersService: PlayersService) {}
 
     @Get(':server')
     async getAllPlayers(@Req() request, @Param() params): Promise<Player[]> {
-        return this.statsService.getAllPlayers(...await this.serversService.getServerProperties(params.server));
+        return this.playersService.getAllPlayers(params.server);
     }
 
     @Get(':server/:lookup')
     async getPlayer(@Req() request, @Param() params): Promise<Player> {
-        return this.statsService.getPlayer(params.lookup,
-            ...await this.serversService.getServerProperties(params.server));
+        return this.playersService.getPlayer(params.lookup, params.server);
+    }
+
+    @Get(':server/:lookup/stats')
+    async getPlayerStats(@Req() request, @Param() params): Promise<any> {
+        const player = await this.playersService.getPlayer(params.lookup, params.server);
+        return this.playersService.getPlayerStats(params.server, player);
     }
 }
